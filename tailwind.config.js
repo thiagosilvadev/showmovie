@@ -1,12 +1,21 @@
 module.exports = {
-  mode: 'jit',
-  purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
+  mode: "jit",
+  purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    fontFamily: {
+      sans: "'Poppins', sans-serif",
+    },
+    extend: {
+      colors: {
+        light: "#6663FF",
+        purple: "#363687",
+        dark: "#0E0D2A",
+      },
+    },
   },
   variants: {
     extend: {},
   },
   plugins: [],
-}
+};
