@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "./Button";
 
-const HeroForm = ({ imgLink }) => {
+const HeroForm = () => {
   const [query, setQuery] = React.useState("");
 
   function search(e) {

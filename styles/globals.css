@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+header nav .nav-item::after {
+  @apply rounded-md transition-all duration-200;
+  content: "";
+  width: 0%;
+  height: 4px;
+  background-color: theme("colors.light");
+  display: flex;
+}
+
+header nav .nav-item:hover::after,
+header nav .nav-item.active::after {
+  width: 100%;
+}
+
+.card {
+}
