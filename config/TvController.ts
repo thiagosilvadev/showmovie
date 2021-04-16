@@ -101,18 +101,25 @@ export function useTvShows(): ResTv {
   };
 }
 
-export function useTvDetail(id: string): ResTvDetail {
+export function useTvDetail(id): ResTvDetail {
+  let shouldFetch = true;
+
+  if (id === undefined || id === "") shouldFetch = false;
   const config: Config = {
     endpoint: `tv/${id}`,
     language: "pt-BR",
   };
 
   const { data, error } = useSWR<TvDetail, Error>(
-    `${config.endpoint}?&language=${config.language}`,
+    () =>
+      shouldFetch ? `${config.endpoint}?&language=${config.language}` : null,
     fetcher
   );
   const { data: creditsData, error: creditsError } = useSWR<Credits, Error>(
-    `${config.endpoint}/credits?&language=${config.language}`,
+    () =>
+      shouldFetch
+        ? `${config.endpoint}/credits?&language=${config.language}`
+        : null,
     fetcher
   );
   let tvshow: TvDetail;

@@ -1,7 +1,7 @@
 import React from "react";
 import Grid from "./Grid";
 
-import { Movie } from "../config/MovieController";
+import { Movie } from "../config/useMovie";
 import { Tv } from "../config/TvController";
 
 interface Props {

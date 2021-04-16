@@ -1,6 +1,6 @@
 import React from "react";
 import Card from "./Card";
-import { Movie } from "../config/MovieController";
+import { Movie } from "../config/useMovie";
 import { Tv } from "../config/TvController";
 interface Props {
   movies?: Array<Movie>;

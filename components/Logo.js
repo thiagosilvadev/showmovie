@@ -8,7 +8,6 @@ export default function Logo() {
       viewBox="0 0 151 21"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="w-48"
     >
       <g id="logo">
         <g id="letters">

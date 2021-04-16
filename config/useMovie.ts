@@ -1,5 +1,6 @@
 import useSWR from "swr";
 import fetcher, { Config } from "./fetcher";
+import React from "react";
 
 ///////////////Interfaces
 type optString = string | null;
@@ -20,14 +21,14 @@ export interface MovieDetail extends Movie, Credits {
   runtime: number | null;
 }
 
-interface People {
+export interface People {
   name: string;
   id: number;
   profile_path: string | null;
   known_for_department: string;
 }
 
-interface Cast extends People {
+export interface Cast extends People {
   order: number;
   character: string;
 }
@@ -48,7 +49,7 @@ interface ResMovies extends Res {
   movies: Movie[];
 }
 
-interface ResMovieDetail extends Res {
+export interface ResMovieDetail extends Res {
   movie: MovieDetail;
 }
 
@@ -97,14 +98,19 @@ export function useMovies(): ResMovies {
   };
 }
 
-export function useMovieDetail(id: string): ResMovieDetail {
+export function useMovieDetail(id): ResMovieDetail {
+  let shouldFetch = true;
+
+  if (id === undefined || id === "") shouldFetch = false;
+
   const config: Config = {
     endpoint: `movie/${id}`,
     language: "pt-BR",
   };
 
   const { data, error } = useSWR<MovieDetail, Error>(
-    `${config.endpoint}?&language=${config.language}`,
+    () =>
+      shouldFetch ? `${config.endpoint}?&language=${config.language}` : null,
     fetcher
   );
   const { data: creditsData, error: creditsError } = useSWR<Credits, Error>(
