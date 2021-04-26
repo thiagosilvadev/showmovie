@@ -4,17 +4,19 @@ import Grid from "./Grid";
 import { Movie } from "../config/useMovie";
 import { Tv } from "../config/TvController";
 
-interface Props {
+interface FeaturedProps {
   heading: string;
   loading: boolean;
   movies?: Array<Movie>;
   shows?: Array<Tv>;
 }
 
-const Featured: React.FC<Props> = ({ movies, loading, shows, heading }) => {
+const Featured = ({ movies, loading, shows, heading }: FeaturedProps) => {
   return (
     <div className="my-10 relative">
-      <h2 className="font-semibold text-4xl mb-8 text-dark">{heading}</h2>
+      <h2 className="font-bold font-heading text-4xl mb-8 text-dark">
+        {heading}
+      </h2>
       {loading ? (
         <svg
           className="animate-spin  h-12 w-12 absolute top-full left-2/4 text-light"

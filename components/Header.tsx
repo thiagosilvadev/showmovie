@@ -2,11 +2,7 @@ import React from "react";
 import Logo from "./Logo";
 import Nav from "./Nav";
 
-interface Props {
-  active: string;
-}
-
-const navBase = [
+export const navBase = [
   {
     name: "Início",
     path: "/",
@@ -24,18 +20,8 @@ const navBase = [
   },
 ];
 
-const Header: React.FC<Props> = ({ active }) => {
-  const [navItems, setNavItems] = React.useState<typeof navBase>([]);
-  React.useEffect(() => {
-    setNavItems(
-      navBase.map((item) => {
-        if (item.name === active) {
-          item.active = true;
-        }
-        return item;
-      })
-    );
-  }, [active]);
+export function Header() {
+  // const [navItems, setNavItems] = React.useState<typeof navBase>([]);
 
   return (
     <header className="bg-dark w-full p-6">
@@ -43,10 +29,8 @@ const Header: React.FC<Props> = ({ active }) => {
         <a className="flex justify-start" href="/">
           <Logo />
         </a>
-        <Nav navItems={navItems} />
+        <Nav navItems={navBase} />
       </div>
     </header>
   );
-};
-
-export default Header;
+}

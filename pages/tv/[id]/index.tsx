@@ -1,27 +1,33 @@
 import React from "react";
 import { useRouter, NextRouter } from "next/router";
+import format from "date-fns/format";
+import { ptBR } from "date-fns/locale";
 
-import { TvDetail, useTvDetail } from "../../config/TvController";
-import Header from "../../components/Header";
-import { Cast } from "../../components/Cast";
+import { useTvDetail, Season } from "../../../config/TvController";
+
+import { Cast } from "../../../components/Cast";
+import { SeasonCard } from "../../../components/SeasonCard";
 
 const Tv = () => {
   const router: NextRouter = useRouter();
   const [year, setYear] = React.useState("");
+  const [season, setSeason] = React.useState<Season>();
 
   const { tvshow, isLoading } = useTvDetail(router.query.id);
 
   React.useEffect(() => {
     if (tvshow) {
-      const date = new Date(tvshow.first_air_date);
+      const date = format(new Date(tvshow.first_air_date), "yyyy", {
+        locale: ptBR,
+      });
 
-      setYear(date.getFullYear().toString());
+      setYear(date);
+      setSeason(tvshow.seasons[tvshow.seasons.length - 1]);
     }
   }, [tvshow]);
 
   return (
     <>
-      <Header active="Séries" />
       <div className="container mt-8 mx-auto">
         {tvshow && (
           <main className="tv">
@@ -79,6 +85,27 @@ const Tv = () => {
                 </div>
               </div>
             </div>
+            <div className="cast mt-16">
+              <h2 className="font-semibold text-dark text-4xl mb-14">
+                Última temporada
+              </h2>
+              {season && (
+                <div className=" w-9/12">
+                  <SeasonCard
+                    season={season}
+                    path={`${router.query.id}/seasons`}
+                    tvshowName={tvshow.name}
+                  />
+                </div>
+              )}
+              <a
+                className="mt-5 text-dark hover:text-light font-medium"
+                href={`${router.query.id}/seasons/`}
+              >
+                Ver todas as temporadas
+              </a>
+            </div>
+
             <div className="cast mt-16">
               <h2 className="font-semibold text-dark text-4xl mb-14">
                 Elenco principal

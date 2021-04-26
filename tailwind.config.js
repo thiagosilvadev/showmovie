@@ -13,6 +13,9 @@ module.exports = {
         dark: "#0E0D2A",
         "text-light": "#6F6F82",
       },
+      fontFamily: {
+        heading: "'Raleway', sans-serif",
+      },
     },
   },
   variants: {

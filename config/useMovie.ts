@@ -41,11 +41,11 @@ interface Credits {
   cast: Array<Cast>;
   crew: Array<Crew>;
 }
-interface Res {
+export interface Res {
   isLoading: boolean;
   isError: Error;
 }
-interface ResMovies extends Res {
+export interface ResMovies extends Res {
   movies: Movie[];
 }
 
@@ -53,7 +53,7 @@ export interface ResMovieDetail extends Res {
   movie: MovieDetail;
 }
 
-interface DataMovies {
+export interface DataMovies {
   page: number;
   results: Array<Movie>;
   total_results: number;
@@ -77,7 +77,7 @@ export function useMovies(): ResMovies {
   let movies: Movie[];
 
   if (data) {
-    movies = data.results.map(
+    movies = data.results.slice(0, 15).map(
       (movie): Movie => {
         return {
           title: movie.title,

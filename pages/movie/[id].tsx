@@ -1,12 +1,9 @@
 import React from "react";
+import Head from "next/head";
 import { useRouter, NextRouter } from "next/router";
 
-import {
-  MovieDetail,
-  ResMovieDetail,
-  useMovieDetail,
-} from "../../config/useMovie";
-import Header from "../../components/Header";
+import { useMovieDetail } from "../../config/useMovie";
+
 import { Cast } from "../../components/Cast";
 
 const Movie = () => {
@@ -25,7 +22,8 @@ const Movie = () => {
 
   return (
     <>
-      <Header active="Filmes" />
+      <Head>{movie && <title>{movie.title} | ShowMovie</title>}</Head>
+
       <div className="container mt-8 mx-auto">
         {movie && (
           <main className="movie">

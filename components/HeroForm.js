@@ -1,12 +1,14 @@
 import React from "react";
 import Button from "./Button";
-
+import { useRouter } from "next/router";
 const HeroForm = () => {
   const [query, setQuery] = React.useState("");
+  const router = useRouter();
 
   function search(e) {
     e.preventDefault();
-    console.log(query);
+    if (query !== "") router.push(`/search/${encodeURI(query)}`);
+    // console.log(query);
   }
   return (
     <div className="relative w-full h-72 flex items-center justify-center mt-7">

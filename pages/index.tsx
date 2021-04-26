@@ -5,7 +5,6 @@ import { useTvDetail, useTvShows } from "../config/TvController";
 
 import Featured from "../components/Featured";
 
-import Header from "../components/Header";
 import HeroForm from "../components/HeroForm";
 
 export default function Home() {
@@ -17,7 +16,7 @@ export default function Home() {
       <Head>
         <title>ShowMovie</title>
       </Head>
-      <Header active="Início" />
+
       <div className="container mx-auto">
         <HeroForm />
 
