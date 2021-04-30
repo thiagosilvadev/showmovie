@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { Movie } from "../config/useMovie";
-import { Tv } from "../config/TvController";
+import { Tv } from "../config/useTv";
 
 interface Props {
   movie?: Movie;

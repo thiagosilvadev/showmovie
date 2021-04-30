@@ -88,7 +88,7 @@ interface ResSeasonDetail extends Res {
   season: SeasonDetail;
 }
 
-interface DataTv {
+export interface DataTv {
   page: number;
   results: Array<Tv>;
   total_results: number;
@@ -113,6 +113,41 @@ export function useTvShows(): ResTv {
 
   if (data) {
     tvshows = data.results.slice(0, 15).map(
+      (tv): Tv => {
+        return {
+          name: tv.name,
+          original_name: tv.name,
+          id: tv.id,
+          poster_path: tv.poster_path,
+          overview: tv.overview,
+          backdrop_path: tv.backdrop_path,
+        };
+      }
+    );
+  }
+
+  return {
+    tvshows,
+    isLoading: !error && !data,
+    isError: error,
+  };
+}
+
+export function usePopularTvShows(page: string): ResTv {
+  const config: Config = {
+    endpoint: "tv/popular",
+    language: "pt-BR",
+    page: page,
+  };
+
+  const { data, error } = useSWR<DataTv, Error>(
+    `${config.endpoint}?&language=${config.language}&page=${config.page}`,
+    fetcher
+  );
+  let tvshows: Tv[];
+
+  if (data) {
+    tvshows = data.results.map(
       (tv): Tv => {
         return {
           name: tv.name,
@@ -257,6 +292,7 @@ export function useSeasonDetail(tvshowId, seasonNumber): ResSeasonDetail {
       shouldFetch ? `${config.endpoint}?&language=${config.language}` : null,
     fetcher
   );
+  const { tvshow } = useTvDetail(tvshowId);
 
   let season: SeasonDetail;
 

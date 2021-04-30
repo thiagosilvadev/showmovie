@@ -3,7 +3,7 @@ import Link from "next/link";
 import format from "date-fns/format";
 import { ptBR } from "date-fns/locale";
 
-import { Season } from "../config/TvController";
+import { Season } from "../config/useTv";
 
 interface Props {
   season: Season;

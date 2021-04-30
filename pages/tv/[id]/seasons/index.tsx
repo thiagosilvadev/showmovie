@@ -2,13 +2,12 @@ import { NextRouter, useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
-import format from "date-fns/format";
-import { ptBR } from "date-fns/locale";
-
 import React from "react";
 
-import { useSeasons } from "../../../../config/TvController";
+import { useSeasons } from "../../../../config/useTv";
 import { SeasonCard } from "../../../../components/SeasonCard";
+import Head from "next/head";
+import LoadSpinner from "../../../../components/LoadSpinner";
 
 const Seasons = () => {
   const router: NextRouter = useRouter();
@@ -20,9 +19,10 @@ const Seasons = () => {
   }, [seasons]);
   return (
     <>
+      <Head>{name && <title>{name}: Temporadas | ShowMovie</title>} </Head>
       <div className="mt-8 container mx-auto">
         {isLoading ? (
-          <p>Carregando...</p>
+          <LoadSpinner />
         ) : (
           <>
             <a

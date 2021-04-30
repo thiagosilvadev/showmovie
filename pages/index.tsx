@@ -1,7 +1,7 @@
 import Head from "next/head";
 import React from "react";
 import { useMovieDetail, useMovies } from "../config/useMovie";
-import { useTvDetail, useTvShows } from "../config/TvController";
+import { useTvDetail, useTvShows } from "../config/useTv";
 
 import Featured from "../components/Featured";
 

@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import { SearchIcon } from "./icons/SearchIcon";
 
 interface Props {
   navItems: {
@@ -10,7 +9,7 @@ interface Props {
   }[];
 }
 
-const Nav: React.FC<Props> = ({ navItems }) => {
+const Nav: React.FC<Props> = ({ navItems, children }) => {
   return (
     <nav className="flex items-center">
       <ul className="flex mr-12 items-center">
@@ -25,7 +24,7 @@ const Nav: React.FC<Props> = ({ navItems }) => {
           </li>
         ))}
       </ul>
-      <SearchIcon />
+      {children}
     </nav>
   );
 };
