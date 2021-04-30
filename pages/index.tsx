@@ -1,11 +1,10 @@
 import Head from "next/head";
 import React from "react";
 import { useMovieDetail, useMovies } from "../config/useMovie";
-import { useTvDetail, useTvShows } from "../config/TvController";
+import { useTvDetail, useTvShows } from "../config/useTv";
 
 import Featured from "../components/Featured";
 
-import Header from "../components/Header";
 import HeroForm from "../components/HeroForm";
 
 export default function Home() {
@@ -17,7 +16,7 @@ export default function Home() {
       <Head>
         <title>ShowMovie</title>
       </Head>
-      <Header active="Início" />
+
       <div className="container mx-auto">
         <HeroForm />
 

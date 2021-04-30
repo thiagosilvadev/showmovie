@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "./Card";
 import { Movie } from "../config/useMovie";
-import { Tv } from "../config/TvController";
+import { Tv } from "../config/useTv";
 interface Props {
   movies?: Array<Movie>;
   shows?: Array<Tv>;
@@ -9,12 +9,10 @@ interface Props {
 
 const Grid: React.FC<Props> = ({ movies, shows }) => {
   return (
-    <div className="grid grid-cols-7">
+    <div className="flex flex-shrink-0 overflow-x-auto">
       {movies
-        ? movies
-            .slice(0, 7)
-            .map((movie) => <Card key={movie.id} movie={movie} />)
-        : shows.slice(0, 7).map((show) => <Card key={show.id} show={show} />)}
+        ? movies.map((movie) => <Card key={movie.id} movie={movie} />)
+        : shows.map((show) => <Card key={show.id} show={show} />)}
     </div>
   );
 };

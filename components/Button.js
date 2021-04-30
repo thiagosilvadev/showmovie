@@ -10,7 +10,7 @@ const Button = ({ href, children, extraClass, ...props }) => {
       </button>
     );
   } else {
-    <a lassName={styles} {...props} href={href}>
+    <a className={styles} {...props} href={href}>
       {children}
     </a>;
   }

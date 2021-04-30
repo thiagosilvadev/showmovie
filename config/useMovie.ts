@@ -12,6 +12,7 @@ export interface Movie {
   poster_path: optString;
   overview: string;
   backdrop_path: optString;
+  popularity?: number;
 }
 
 export interface MovieDetail extends Movie, Credits {
@@ -41,11 +42,11 @@ interface Credits {
   cast: Array<Cast>;
   crew: Array<Crew>;
 }
-interface Res {
+export interface Res {
   isLoading: boolean;
   isError: Error;
 }
-interface ResMovies extends Res {
+export interface ResMovies extends Res {
   movies: Movie[];
 }
 
@@ -53,7 +54,7 @@ export interface ResMovieDetail extends Res {
   movie: MovieDetail;
 }
 
-interface DataMovies {
+export interface DataMovies {
   page: number;
   results: Array<Movie>;
   total_results: number;
@@ -77,6 +78,41 @@ export function useMovies(): ResMovies {
   let movies: Movie[];
 
   if (data) {
+    movies = data.results.slice(0, 15).map(
+      (movie): Movie => {
+        return {
+          title: movie.title,
+          original_title: movie.original_title,
+          id: movie.id,
+          poster_path: movie.poster_path,
+          overview: movie.overview,
+          backdrop_path: movie.backdrop_path,
+        };
+      }
+    );
+  }
+
+  return {
+    movies,
+    isLoading: !error && !data,
+    isError: error,
+  };
+}
+
+export function usePopularMovies(page: string): ResMovies {
+  const config: Config = {
+    endpoint: "movie/popular",
+    language: "pt-BR",
+    page: page,
+  };
+
+  const { data, error } = useSWR<DataMovies, Error>(
+    `${config.endpoint}?&language=${config.language}&page=${config.page}`,
+    fetcher
+  );
+  let movies: Movie[];
+
+  if (data) {
     movies = data.results.map(
       (movie): Movie => {
         return {
@@ -86,6 +122,7 @@ export function useMovies(): ResMovies {
           poster_path: movie.poster_path,
           overview: movie.overview,
           backdrop_path: movie.backdrop_path,
+          popularity: movie.popularity,
         };
       }
     );
