@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle, css } from 'styled-components'
 
 const GlobalStyles = createGlobalStyle`
   * {
@@ -11,9 +11,19 @@ const GlobalStyles = createGlobalStyle`
   html {
     font-size: 62.5%;
   }
-  body {
-    font-family: "Raleway", sans-serif;
-  }
+
+  ${({ theme }) => css`
+    body {
+      font-family: ${theme.font.family.primary};
+      background-color: ${theme.colors.gray[900]};
+      background-image: url('/bg.png');
+      background-size: 100%;
+      background-position: 50% -160px;
+      background-repeat: repeat-y;
+      color: ${theme.colors.white[100]};
+    }
+  `}
+
 `
 
 export default GlobalStyles
