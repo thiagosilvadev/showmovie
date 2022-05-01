@@ -8,11 +8,13 @@
     "start": "next start",
     "lint": "next lint",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "generate": "yarn plop --plopfile generators/plopfile.js"
   },
   "dependencies": {
     "eslint-plugin-prettier": "^4.0.0",
     "next": "12.1.5",
+    "plop": "^3.1.0",
     "react": "18.0.0",
     "react-dom": "18.0.0",
     "react-is": "^18.0.0",

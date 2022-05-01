@@ -7,6 +7,20 @@ import GlobalStyles from '../src/styles/global';
 import theme from '../src/styles/theme';
 
 
+// .storybook/preview.js
+
+export const parameters = {
+  backgrounds: {
+    default: 'dark',
+    values: [
+      {
+        name: 'dark',
+        value: '#20283E',
+      },
+    ],
+  },
+};
+
 const providerFn = ({ theme, children }) => {
   return <ThemeProvider theme={theme}>
     <>
