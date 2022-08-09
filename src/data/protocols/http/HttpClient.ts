@@ -6,8 +6,8 @@ export type HttpRequest = {
   params?: Record<string, unknown>
 }
 
-export interface HttpClient<R = any> {
-  request: (data: HttpRequest) => Promise<HttpResponse<R>>
+export interface HttpClient {
+  request: <R = any>(data: HttpRequest) => Promise<HttpResponse<R>>
 }
 
 export type HttpMethod = 'post' | 'get' | 'put' | 'delete'

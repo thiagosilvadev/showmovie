@@ -5,17 +5,17 @@ import {
   HttpStatusCode
 } from '@/data/protocols/http/HttpClient'
 
-export class HttpClientSpy<R = any> implements HttpClient {
+export class HttpClientSpy implements HttpClient {
   url?: string
   method?: string
   body?: any
   headers?: any
   params?: Record<string, unknown> | undefined
-  response: HttpResponse<R> = {
+  response: HttpResponse = {
     statusCode: HttpStatusCode.ok
   }
 
-  request(data: HttpRequest): Promise<HttpResponse<R>> {
+  request<R = any>(data: HttpRequest): Promise<HttpResponse<R>> {
     Object.assign(this, data)
     return Promise.resolve(this.response)
   }
