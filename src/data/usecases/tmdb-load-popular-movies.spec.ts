@@ -5,6 +5,8 @@ import { faker } from '@faker-js/faker'
 import { LoadPopularMovies } from '@/domain/usecases'
 import { Movie } from '@/domain/models'
 import { HttpStatusCode } from '../protocols/http/HttpClient'
+import UnauthorizedError from '@/domain/errors/unauthorized-error'
+import { UnexpectedError } from '@/domain/errors'
 
 const mockLoadPopularMoviesParams = (): LoadPopularMovies.Params => ({
   page: faker.datatype.number()
@@ -63,5 +65,21 @@ describe('TMDBLoadPopularMovies', () => {
     const data = await sut.load(mockLoadPopularMoviesParams())
 
     expect(data).toEqual(body)
+  })
+  test('should rejects the promise and throw UnauthorizedError if the request returns 401', () => {
+    const { httpClient, sut } = makeSut()
+    httpClient.response.statusCode = HttpStatusCode.unauthorized
+
+    const promise = sut.load(mockLoadPopularMoviesParams())
+
+    expect(promise).rejects.toThrow(new UnauthorizedError())
+  })
+  test('should rejects the promise and throw UnexpectedError if the request return any statuscode thats not 200 or 401', () => {
+    const { httpClient, sut } = makeSut()
+    httpClient.response.statusCode = HttpStatusCode.unauthorized
+
+    const promise = sut.load(mockLoadPopularMoviesParams())
+
+    expect(promise).rejects.toThrow(new UnexpectedError())
   })
 })
