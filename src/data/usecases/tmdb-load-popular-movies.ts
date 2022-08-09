@@ -1,4 +1,6 @@
 import { HttpClient, HttpStatusCode } from '@/data/protocols/http/HttpClient'
+import { UnexpectedError } from '@/domain/errors'
+import UnauthorizedError from '@/domain/errors/unauthorized-error'
 import { LoadPopularMovies } from '@/domain/usecases'
 
 export class TMDBLoadPopularMovies implements LoadPopularMovies {
@@ -19,8 +21,10 @@ export class TMDBLoadPopularMovies implements LoadPopularMovies {
       case HttpStatusCode.ok:
         return response.body
         break
+      case HttpStatusCode.unauthorized:
+        throw new UnauthorizedError()
       default:
-        throw new Error()
+        throw new UnexpectedError()
         break
     }
   }
