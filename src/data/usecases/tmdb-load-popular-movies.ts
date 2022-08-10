@@ -32,6 +32,7 @@ export class TMDBLoadPopularMovies implements LoadPopularMovies {
 
     switch (response.statusCode) {
       case HttpStatusCode.ok:
+        console.log(response)
         return {
           page: response.body!.page,
           totalPages: response.body!.total_pages,
