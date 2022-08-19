@@ -1,15 +1,13 @@
-import styled, { css } from 'styled-components'
-
-const Container = styled.div`
-  ${({ theme }) => css`
-    font-size: ${theme.font.size.huge};
-    background-color: ${theme.colors.dark[900]};
-    color: ${theme.colors.white};
-  `};
-`
+import tmdb from '@/lib/tmdb'
 
 const Home = () => {
-  return <Container>Hello</Container>
+  const { movies, tvshows } = tmdb()
+  movies.loadPopular(1).then((movies) => {
+    console.log(movies)
+  })
+  tvshows.loadPopular(1).then((tvshows) => {
+    console.log(tvshows)
+  })
 }
 
 export default Home
