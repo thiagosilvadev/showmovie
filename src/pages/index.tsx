@@ -1,11 +1,5 @@
-import { Header } from '@/components/navbar'
+import { HomeLayout } from '@/templates/home'
 
-const Home = () => {
-  return (
-    <>
-      <Header />
-    </>
-  )
-}
+const Home = () => <HomeLayout />
 
 export default Home

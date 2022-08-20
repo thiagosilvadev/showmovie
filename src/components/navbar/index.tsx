@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { Container } from '../container'
 import * as S from './styles'
 
-export const Header = () => (
+export const Navbar = () => (
   <S.Wrapper>
     <Container>
       <Image src="/logo.svg" alt="" width={120} height={50} />
