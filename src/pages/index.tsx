@@ -1,13 +1,11 @@
-import tmdb from '@/lib/tmdb'
+import { Header } from '@/components/navbar'
 
 const Home = () => {
-  const { movies, tvshows } = tmdb()
-  movies.loadPopular(1).then((movies) => {
-    console.log(movies)
-  })
-  tvshows.loadPopular(1).then((tvshows) => {
-    console.log(tvshows)
-  })
+  return (
+    <>
+      <Header />
+    </>
+  )
 }
 
 export default Home

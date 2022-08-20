@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle, css } from 'styled-components'
 
 export const GlobalStyles = createGlobalStyle`
   *, *::after, *::before {
@@ -11,7 +11,14 @@ export const GlobalStyles = createGlobalStyle`
   html {
     font-size: 62.5%;
   }
-  body {
-    font-family: ${({ theme }) => theme.font.family.primary};
-  }
+
+  ${({ theme }) => css`
+    body {
+      font-family: ${theme.font.family.primary};
+      background-color: ${theme.colors.dark[900]};
+      background-image: url('/background.png');
+      background-size: cover;
+    }
+  `}
+
 `
