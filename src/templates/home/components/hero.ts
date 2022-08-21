@@ -32,8 +32,10 @@ export const Label = styled.label`
     letter-spacing: -0.015em;
     position: absolute;
     top: 1.2rem;
-    left: 1.6rem;
+    left: 1rem;
     transition: all 500ms ease;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 50%, #101626 50%);
+    padding: 0 0.8rem;
   `}
 `
 
@@ -63,7 +65,7 @@ export const Input = styled.input`
 
 export const Button = styled.button`
   ${({ theme }) => css`
-    padding: 1.6rem;
+    padding: 2rem 1.6rem;
     border-top-right-radius: 1.2rem;
     border-bottom-right-radius: 1.2rem;
     border: 1px solid ${theme.colors.dark[700]};
@@ -93,7 +95,7 @@ export const Form = styled.form`
       }
 
       ${Input}, ${Button} {
-        border-color: ${theme.colors.dark[500]};
+        border-color: ${theme.colors.primary[500]};
         padding: 2rem 1.6rem;
       }
     }

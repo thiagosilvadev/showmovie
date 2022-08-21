@@ -1,6 +1,7 @@
 import { Container } from '@/components/container'
 import { Navbar } from '@/components/navbar'
 import * as Hero from './components/hero'
+import { Switch } from './components/switch'
 
 const HomeLayout = () => (
   <>
@@ -42,6 +43,7 @@ const HomeLayout = () => (
             </svg>
           </Hero.Button>
         </Hero.Form>
+        <Switch />
       </Hero.Wrapper>
     </Container>
   </>
