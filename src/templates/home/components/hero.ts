@@ -84,6 +84,7 @@ export const Form = styled.form`
   display: flex;
   margin-top: 2.4rem;
   height: 6.6rem;
+  margin-bottom: 3.2rem;
 
   ${({ theme }) => css`
     &:focus-within {

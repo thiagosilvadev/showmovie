@@ -8,13 +8,14 @@ type PosterSizes =
   | 'original'
 
 export abstract class TMDBModel {
-  poster?: string | null
+  poster_path?: string | null
   constructor(
     private readonly baseImageUrl: string = 'http://image.tmdb.org/t/p/'
   ) {}
 
   getPoster(size: PosterSizes) {
-    if (this.poster) return `${this.baseImageUrl}${size}${this.poster}`
+    if (this.poster_path)
+      return `${this.baseImageUrl}${size}${this.poster_path}`
     else return null
   }
 }

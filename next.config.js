@@ -4,6 +4,9 @@ const nextConfig = {
   swcMinify: true,
   compiler: {
     styledComponents: true
+  },
+  images: {
+    domains: ['www.themoviedb.org', 'image.tmdb.org']
   }
 }
 
