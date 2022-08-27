@@ -2,11 +2,11 @@ import * as S from './styles'
 
 type SwitchProps = {
   items: {
-    label: string
-    value: string
+    label: any
+    value: any
   }[]
-  value: string
-  onChange: (value: string) => void
+  value: any
+  onChange: (value: any) => void
 }
 
 export const Switch = ({ value, onChange, items }: SwitchProps) => {

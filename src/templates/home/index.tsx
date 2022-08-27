@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 import { Card, CardPlaceholder, CardProps } from '@/components/card'
 import { Container } from '@/components/container'
 import { Navbar } from '@/components/navbar'
@@ -8,28 +6,26 @@ import { Switch } from './components/switch'
 import * as Hero from './components/hero'
 import * as Grid from './components/grid'
 
-const switchValues = [
-  {
-    label: 'Todos',
-    value: 'all'
-  },
-  {
-    label: 'Filmes',
-    value: 'movies'
-  },
-  {
-    label: 'Séries',
-    value: 'tv'
-  }
-]
-
-export type HomeProps = {
-  content: CardProps[]
-  isLoading: boolean
+type CategoryValues<T = any> = {
+  label: string
+  value: T
 }
 
-const HomeLayout = ({ content, isLoading }: HomeProps) => {
-  const [category, setCategory] = useState('all')
+export interface HomeProps {
+  content: CardProps[]
+  isLoading: boolean
+  category: string
+  categoryValues: CategoryValues[]
+  onSelectCategory: (category: CategoryValues['value']) => void
+}
+
+const HomeLayout = ({
+  content,
+  isLoading,
+  category,
+  categoryValues,
+  onSelectCategory
+}: HomeProps) => {
   return (
     <>
       <Navbar />
@@ -72,8 +68,8 @@ const HomeLayout = ({ content, isLoading }: HomeProps) => {
           </Hero.Form>
           <Switch
             value={category}
-            items={switchValues}
-            onChange={(value) => setCategory(value)}
+            items={categoryValues}
+            onChange={onSelectCategory}
           />
         </Hero.Wrapper>
         <Grid.Wrapper>
