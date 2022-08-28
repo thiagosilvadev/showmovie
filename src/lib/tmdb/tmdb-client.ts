@@ -1,5 +1,6 @@
 import { HttpClient } from '@/infra/protocols/http/HttpClient'
 import { MovieClient } from './movies/movie-client'
+import { SearchClient } from './search/search-client'
 import { TvShowClient } from './tv-shows/tv-show-client'
 
 export default class TMDBClient {
@@ -9,5 +10,8 @@ export default class TMDBClient {
   }
   get movies() {
     return new MovieClient(this.httpClient)
+  }
+  get search() {
+    return new SearchClient(this.httpClient)
   }
 }

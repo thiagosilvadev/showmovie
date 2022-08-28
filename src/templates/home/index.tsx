@@ -16,6 +16,8 @@ export interface HomeProps {
   isLoading: boolean
   category: string
   categoryValues: CategoryValues[]
+  searchValue: string
+  onSearchValueChange: (value: string) => void
   onSelectCategory: (category: CategoryValues['value']) => void
 }
 
@@ -24,7 +26,9 @@ const HomeLayout = ({
   isLoading,
   category,
   categoryValues,
-  onSelectCategory
+  onSelectCategory,
+  searchValue,
+  onSearchValueChange
 }: HomeProps) => {
   return (
     <>
@@ -38,9 +42,14 @@ const HomeLayout = ({
           <Hero.Subtitle>
             Encontre milhares de filmes e séries, faça a sua pesquisa:
           </Hero.Subtitle>
-          <Hero.Form>
+          <Hero.Form onSubmit={(e) => e.preventDefault()}>
             <Hero.Label>Buscar por filmes ou séries</Hero.Label>
-            <Hero.Input type="text" placeholder="Ex: Breaking Bad" />
+            <Hero.Input
+              type="text"
+              placeholder="Ex: Breaking Bad"
+              value={searchValue}
+              onChange={(e) => onSearchValueChange(e.target.value)}
+            />
             <Hero.Button type="submit">
               <svg
                 width="24"
@@ -73,58 +82,9 @@ const HomeLayout = ({
           />
         </Hero.Wrapper>
         <Grid.Wrapper>
-          {isLoading ? (
-            <>
-              <CardPlaceholder />
-              <CardPlaceholder />
-              <CardPlaceholder />
-              <CardPlaceholder />
-            </>
-          ) : (
-            content.map((card) => <Card key={card.title} {...card} />)
-          )}
-
-          {/*    <Card
-            title="Better Call Saul"
-            link="/tv/better-call-saul"
-            rating={10}
-            poster="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg"
-          />
-            <Card
-            title="Top Gun: Maverick"
-            rating={10}
-            poster="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/62HCnUTziyWcpDaBO2i1DX17ljH.jpg"
-          />
-          <Card
-            title="Better Call Saul"
-            rating={10}
-            poster="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg"
-          />
-          <Card
-            title="Better Call Saul"
-            rating={10}
-            poster="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg"
-          />
-          <Card
-            title="Better Call Saul"
-            rating={10}
-            poster="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg"
-          />
-          <Card
-            title="Top Gun: Maverick"
-            rating={10}
-            poster="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/62HCnUTziyWcpDaBO2i1DX17ljH.jpg"
-          />
-          <Card
-            title="Better Call Saul"
-            rating={10}
-            poster="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg"
-          />
-          <Card
-            title="Better Call Saul"
-            rating={10}
-            poster="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg"
-          /> */}
+          {isLoading
+            ? Array(4).fill(<CardPlaceholder />)
+            : content.map((card, index) => <Card key={index} {...card} />)}
         </Grid.Wrapper>
       </Container>
       <Footer />

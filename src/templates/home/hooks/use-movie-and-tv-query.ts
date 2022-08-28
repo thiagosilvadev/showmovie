@@ -1,31 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
 
 import tmdb from '@/lib/tmdb'
-import { TMDBMovie } from '@/lib/tmdb/models/TMDBMovie'
-import { TMDBTvShow } from '@/lib/tmdb/models/TMDBTvShow'
 import { CardProps } from '@/components/card'
+import { moviesOrTvToCard } from '@/utils/mappers'
 
-type MovieAndTV = TMDBMovie | TMDBTvShow
-
-function moviesOrTvToCard(content: MovieAndTV[]): CardProps[] {
-  return content.map((item) => {
-    if (item instanceof TMDBMovie) {
-      return {
-        title: item.title,
-        link: `/movie/${item.id}`,
-        poster: item.getPoster('w500'),
-        rating: item.vote_average
-      }
-    } else {
-      return {
-        title: item.name,
-        link: `/tv/${item.id}`,
-        poster: item.getPoster('w500'),
-        rating: item.vote_average
-      }
-    }
-  })
-}
 export type FetchMode = 'both' | 'movies' | 'tvshows'
 
 type MovieAndTvQueryResult = {
@@ -62,11 +40,19 @@ const fetchMovieAndTv = async () => {
   }
 }
 
-const useMovieAndTvQuery = (fetchMode: FetchMode): MovieAndTvQueryResult => {
-  const { data, isLoading } = useQuery(['moviesAndTv'], fetchMovieAndTv, {
-    refetchOnWindowFocus: false,
-    cacheTime: 60 * 60
-  })
+const useMovieAndTvQuery = (
+  fetchMode: FetchMode,
+  isSearching: boolean
+): MovieAndTvQueryResult => {
+  const { data, isLoading } = useQuery(
+    ['moviesAndTv', isSearching],
+    fetchMovieAndTv,
+    {
+      refetchOnWindowFocus: false,
+      cacheTime: 60 * 60,
+      enabled: !isSearching
+    }
+  )
 
   return {
     isLoading,
