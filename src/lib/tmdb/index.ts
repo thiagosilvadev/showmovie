@@ -5,7 +5,8 @@ export default function tmdb() {
   const httpClient = new AxiosHttpClient(
     String(process.env.NEXT_PUBLIC_TMDB_URL),
     {
-      api_key: process.env.NEXT_PUBLIC_API_KEY
+      api_key: process.env.NEXT_PUBLIC_API_KEY,
+      language: 'pt-BR'
     }
   )
   return new TMDBClient(httpClient)

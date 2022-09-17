@@ -4,7 +4,13 @@ import {
   HttpResponse,
   HttpStatusCode
 } from '@/infra/protocols/http/HttpClient'
-import { Movie, TMDBMovie } from '../models/TMDBMovie'
+import {
+  Movie,
+  MovieDetail,
+  TMDBMovie,
+  TMDBMovieCredits,
+  TMDBMovieDetail
+} from '../models/TMDBMovie'
 import ResultList from '../models/TMDBResultList'
 
 export class MovieClient {
@@ -58,5 +64,23 @@ export class MovieClient {
     }))
 
     return data
+  }
+
+  async loadDetails(movieId: number): Promise<TMDBMovieDetail> {
+    const response = await this.httpClient.request<MovieDetail>({
+      method: 'get',
+      url: `movie/${movieId}`
+    })
+
+    return this.handleResponse(response, (movie) => new TMDBMovieDetail(movie!))
+  }
+
+  async loadCredits(movieId: number): Promise<TMDBMovieCredits> {
+    const response = await this.httpClient.request<TMDBMovieCredits>({
+      method: 'get',
+      url: `movie/${movieId}/credits`
+    })
+
+    return this.handleResponse(response, (credits) => credits!)
   }
 }
