@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import { Loader } from '../loader'
 import * as S from './styles'
 
 export type CardProps = {
@@ -61,11 +62,11 @@ const Card = ({ title, rating, poster, link }: CardProps) => {
 const CardPlaceholder = () => (
   <S.WrapperPlaceholder>
     <S.ImagePlaceholder>
-      <S.Loader />
+      <Loader />
     </S.ImagePlaceholder>
     <S.BadgePlaceholder />
     <S.TitlePlaceholder>
-      <S.Loader />
+      <Loader />
     </S.TitlePlaceholder>
   </S.WrapperPlaceholder>
 )

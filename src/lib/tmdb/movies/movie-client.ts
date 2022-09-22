@@ -8,7 +8,7 @@ import {
   Movie,
   MovieDetail,
   TMDBMovie,
-  TMDBMovieCredits,
+  TMDBCredits,
   TMDBMovieDetail
 } from '../models/TMDBMovie'
 import ResultList from '../models/TMDBResultList'
@@ -75,8 +75,8 @@ export class MovieClient {
     return this.handleResponse(response, (movie) => new TMDBMovieDetail(movie!))
   }
 
-  async loadCredits(movieId: number): Promise<TMDBMovieCredits> {
-    const response = await this.httpClient.request<TMDBMovieCredits>({
+  async loadCredits(movieId: number): Promise<TMDBCredits> {
+    const response = await this.httpClient.request<TMDBCredits>({
       method: 'get',
       url: `movie/${movieId}/credits`
     })

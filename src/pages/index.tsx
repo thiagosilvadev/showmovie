@@ -1,8 +1,11 @@
+import { useState } from 'react'
 import { useDebounce } from '@/hooks'
 import { HomeLayout } from '@/templates/home'
-import { FetchMode, useMovieAndTvQuery } from '@/templates/home/hooks'
-import { useMovieAndTVSearch } from '@/templates/home/hooks/use-movie-and-tv-search'
-import { useState } from 'react'
+import {
+  FetchMode,
+  useMovieAndTvQuery,
+  useMovieAndTVSearch
+} from '@/lib/http/requests'
 const categories = [
   {
     label: 'Todos',
@@ -23,7 +26,6 @@ const Home = () => {
   const [query, setQuery] = useState('')
   const debouncedQuery = useDebounce(query)
   const moviesAndTv = useMovieAndTvQuery(category, debouncedQuery !== '')
-
   const search = useMovieAndTVSearch(debouncedQuery, category)
 
   const isLoading = debouncedQuery ? search.isLoading : moviesAndTv.isLoading

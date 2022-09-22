@@ -120,7 +120,7 @@ export interface SpokenLanguage {
   name: string
 }
 
-export interface TMDBMovieCredits {
+export interface TMDBCredits {
   id: number
   cast: Cast[]
   crew: Crew[]

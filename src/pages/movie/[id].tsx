@@ -1,27 +1,13 @@
-import tmdb from '@/lib/tmdb'
+import { useMovieDetail } from '@/lib/http/requests'
+
 import { MovieLayout } from '@/templates/movie'
-import { useQuery } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
 
-const { movies } = tmdb()
 export default function Movie() {
   const router = useRouter()
   const { id } = router.query
-  const { data, isLoading, error } = useQuery(
-    ['movieDetail', id],
-    async () => await movies.loadDetails(Number(id!))
-  )
-  const credits = useQuery(
-    ['movieCredits', id],
-    async () => await movies.loadCredits(Number(id!))
-  )
+  const movieId = id ? Number(id) : undefined
+  const request = useMovieDetail(movieId)
 
-  return (
-    <MovieLayout
-      movie={data}
-      credits={credits.data}
-      isLoading={isLoading}
-      error={!!error}
-    />
-  )
+  return <MovieLayout {...request} />
 }

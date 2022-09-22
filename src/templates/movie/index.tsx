@@ -3,40 +3,42 @@ import Cast from '@/components/cast'
 
 import { Footer } from '@/components/footer'
 import { Navbar } from '@/components/navbar'
-import { TMDBMovieCredits, TMDBMovieDetail } from '@/lib/tmdb/models/TMDBMovie'
+import Poster from '@/components/poster'
+import { MovieDetail } from '@/lib/http/requests'
 
 import * as S from './styles'
 
-type MovieLayoutProps = {
-  movie: TMDBMovieDetail | undefined
-  isLoading: boolean
-  error: boolean
-  credits: TMDBMovieCredits | undefined
-}
+type MovieLayoutProps = MovieDetail
 
-const MovieLayout = ({ movie, isLoading, credits }: MovieLayoutProps) => {
-  if (!movie || !credits || isLoading) return <div>carregando...</div>
+const MovieLayout = ({ detail, credits }: MovieLayoutProps) => {
+  if (!detail.data || !credits.data) return <div>carregando...</div>
 
-  const directors = credits?.crew.filter((crew) => crew.job == 'Director')
-  const writers = credits?.crew.filter((crew) => crew.job == 'Writer')
+  const movie = detail.data
+
+  const isLoading = detail.isLoading || credits.isLoading
+
+  const cast = credits.data.cast ? credits.data.cast.slice(0, 15) : []
+
+  const directors = credits.data.crew.filter((crew) => crew.job == 'Director')
+  const writers = credits.data.crew.filter((crew) => crew.job == 'Writer')
 
   return (
     <>
       <Navbar />
       <S.Container>
-        <Backdrop src={movie.getBackdrop('original')!} alt={movie.title} />
+        <Backdrop
+          src={movie.getBackdrop('original')!}
+          alt={movie.title}
+          placeholder={isLoading}
+        />
         <S.InfoWrapper>
-          <S.PosterWrapper>
-            <S.TitleBox>
-              <S.Title>{movie.title}</S.Title>
-            </S.TitleBox>
-            <S.Poster
-              src={movie.getPoster('original')!}
-              width={486}
-              height={730}
-              objectFit="cover"
-            />
-          </S.PosterWrapper>
+          <Poster
+            title={movie.title}
+            src={movie.getPoster('original')!}
+            alt={movie.title}
+            placeholder={isLoading}
+          />
+
           <S.DetailWrapper>
             <S.Tagline>{movie.tagline}</S.Tagline>
             <S.Bio>{movie.overview}</S.Bio>
@@ -73,7 +75,7 @@ const MovieLayout = ({ movie, isLoading, credits }: MovieLayoutProps) => {
         </S.InfoWrapper>
         <Cast.Title>Elenco Principal</Cast.Title>
         <Cast.List>
-          {credits.cast.slice(0, 15).map((actor) => (
+          {cast.slice(0, 15).map((actor) => (
             <Cast.Item
               key={actor.id}
               avatar={actor.profile_path}

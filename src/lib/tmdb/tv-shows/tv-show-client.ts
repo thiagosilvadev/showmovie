@@ -1,6 +1,12 @@
 import { HttpClient } from '@/infra/protocols/http/HttpClient'
+import { TMDBCredits } from '../models/TMDBMovie'
 import ResultList from '../models/TMDBResultList'
-import { TMDBTvShow, TvShow } from '../models/TMDBTvShow'
+import {
+  TMDBTvShow,
+  TMDBTvShowDetail,
+  TvShow,
+  TvShowDetail
+} from '../models/TMDBTvShow'
 import { Fetcher } from '../utils/fetcher'
 
 export class TvShowClient extends Fetcher {
@@ -40,5 +46,26 @@ export class TvShowClient extends Fetcher {
     }))
 
     return data
+  }
+
+  async loadDetails(tvshowId: number): Promise<TMDBTvShowDetail> {
+    const response = await this.httpClient.request<TvShowDetail>({
+      method: 'get',
+      url: `tv/${tvshowId}`
+    })
+
+    return this.handleResponse(
+      response,
+      (tvshow) => new TMDBTvShowDetail(tvshow!)
+    )
+  }
+
+  async loadCredits(tvshowId: number): Promise<TMDBCredits> {
+    const response = await this.httpClient.request<TMDBCredits>({
+      method: 'get',
+      url: `tv/${tvshowId}/credits`
+    })
+
+    return this.handleResponse(response, (credits) => credits!)
   }
 }
