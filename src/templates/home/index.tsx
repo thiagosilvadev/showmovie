@@ -83,7 +83,9 @@ const HomeLayout = ({
         </Hero.Wrapper>
         <Grid.Wrapper>
           {isLoading
-            ? Array(4).fill(<CardPlaceholder />)
+            ? Array(4)
+                .fill(CardPlaceholder)
+                .map((Card, index) => <Card key={index} />)
             : content.map((card, index) => <Card key={index} {...card} />)}
         </Grid.Wrapper>
       </Container>

@@ -20,6 +20,12 @@ export const Poster = styled(Image)`
 
 export const DetailWrapper = styled.div``
 
+export const DetailGrid = styled.div`
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+`
+
 export const Tagline = styled.h3`
   ${({ theme }) => css`
     font-family: ${theme.font.family.secondary};
@@ -44,8 +50,19 @@ export const Bio = styled.p`
   `}
 `
 
-export const Detail = styled.div`
+type DetailProps = {
+  columns?: number
+}
+
+export const Detail = styled.div<DetailProps>`
   padding: 1.2rem 0;
+  width: 100%;
+
+  ${({ columns }) =>
+    !!columns &&
+    css`
+      width: ${(columns / 12) * 100}%;
+    `}
 `
 
 export const DetailTitle = styled.h4`
