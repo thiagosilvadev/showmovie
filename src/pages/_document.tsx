@@ -40,7 +40,7 @@ export default class MyDocument extends Document {
             rel="stylesheet"
           />
         </Head>
-        <body>
+        <body className="bg-dark-900">
           <Main />
           <NextScript />
         </body>

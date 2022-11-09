@@ -29,13 +29,18 @@ const LinkWrapper = ({ children, link }: LinkWrapperProps) => {
 const Card = ({ title, rating, poster, link }: CardProps) => {
   return (
     <LinkWrapper link={link}>
-      <S.Wrapper>
+      <div className="bg-dark-800/80 relative backdrop-blur-[80px] p-2  rounded-lg pb-6 ">
         {poster ? (
-          <Image src={poster} width={600} height={900} />
+          <Image
+            className="w-full h-10 rounded-lg"
+            src={poster}
+            width={600}
+            height={900}
+          />
         ) : (
           <S.ImagePlaceholder />
         )}
-        <S.Rating>
+        <div className="absolute top-4 left-4 text-[#ffad49] flex p-2 py-3 justify-center items-center gap-1 bg-black/60 rounded-lg backdrop-blur text-base font-secondary">
           <svg
             width="16"
             height="16"
@@ -51,10 +56,12 @@ const Card = ({ title, rating, poster, link }: CardProps) => {
               strokeLinejoin="round"
             />
           </svg>
-          <span>{rating}</span>
-        </S.Rating>
-        <S.Title>{title}</S.Title>
-      </S.Wrapper>
+          <span style={{ lineHeight: '1' }}>{rating}</span>
+        </div>
+        <h4 className="mt-4 ml-4 font-sans text-base font-bold text-dark-50">
+          {title}
+        </h4>
+      </div>
     </LinkWrapper>
   )
 }

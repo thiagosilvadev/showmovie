@@ -1,0 +1,8 @@
+.hero_form {
+  @apply w-full max-w-[80%] relative flex mt-6 mb-8
+}
+
+.label {
+  @apply absolute text-sm font-normal tracking-tight font-secondary
+  text-dark-600 top-3 left-4 transition-all;
+}

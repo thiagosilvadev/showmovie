@@ -1,4 +1,4 @@
-import * as S from './styles'
+import classNames from 'classnames'
 
 type SwitchProps = {
   items: {
@@ -10,23 +10,26 @@ type SwitchProps = {
 }
 
 export const Switch = ({ value, onChange, items }: SwitchProps) => {
-  if (!items || items.length === 0) throw new Error('items cannot be empty')
-
-  const getActiveIndex = () => items.findIndex((item) => item.value === value)
+  const grid = `grid-cols-${items.length}`
   return (
-    <S.Switch>
-      <S.Wrapper activeIndex={getActiveIndex()} totalItems={items.length}>
+    <div className="relative p-2 rounded-lg w-fit bg-black/10">
+      <div className={classNames('grid', grid)}>
         {items.map((item) => (
-          <S.SwitchItem
-            active={value === item.value}
+          <button
+            className={classNames(
+              'rounded-md font-semibold font-secondary font-base transition-all cursor-pointer bg-none active:bg-primary-600 px-8 py-2 text-dark-300',
+              {
+                'bg-primary-600 text-primary-50': value === item.value
+              }
+            )}
             key={item.value}
             onClick={() => onChange(item.value)}
             onFocus={() => onChange(item.value)}
           >
             {item.label}
-          </S.SwitchItem>
+          </button>
         ))}
-      </S.Wrapper>
-    </S.Switch>
+      </div>
+    </div>
   )
 }

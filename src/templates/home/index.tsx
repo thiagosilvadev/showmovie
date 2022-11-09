@@ -1,10 +1,11 @@
 import { Card, CardPlaceholder, CardProps } from '@/components/card'
-import { Container } from '@/components/container'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import { Switch } from './components/switch'
-import * as Hero from './components/hero'
 import * as Grid from './components/grid'
+import classNames from 'classnames'
+
+import styles from './styles.module.css'
 
 type CategoryValues<T = any> = {
   label: string
@@ -33,24 +34,50 @@ const HomeLayout = ({
   return (
     <>
       <Navbar />
-      <Container>
-        <Hero.Wrapper>
-          <Hero.Title>
+      <div className="container mx-auto">
+        <div className="w-full pt-20 ">
+          <h1 className="text-6xl font-bold tracking-tight text-dark-50">
             Bem vindo
             <br /> ao ShowMovie!
-          </Hero.Title>
-          <Hero.Subtitle>
+          </h1>
+          <h2 className="text-[#c3c8d4] text-xl mt-2 font-medium tracking-[-0.015em]">
             Encontre milhares de filmes e séries, faça a sua pesquisa:
-          </Hero.Subtitle>
-          <Hero.Form onSubmit={(e) => e.preventDefault()}>
-            <Hero.Label>Buscar por filmes ou séries</Hero.Label>
-            <Hero.Input
+          </h2>
+          <form
+            className={classNames(styles.hero_form, 'group', 'h-16')}
+            onSubmit={(e) => e.preventDefault()}
+          >
+            <label
+              className={classNames(
+                styles.label,
+                'absolute',
+                'top-0',
+                'text-dark-100',
+                'font-medium'
+              )}
+            >
+              Buscar por filmes ou séries
+            </label>
+            <input
               type="text"
+              className={classNames(
+                'outline-none',
+                'font-secondary text-white text-base',
+                'border border-dark-700 border-r-0',
+                'w-full',
+                'py-3 px-4 pt-8',
+                'rounded-xl rounded-r-none',
+                'bg-black/10',
+                'group-focus-within:border-primary-600'
+              )}
               placeholder="Ex: Breaking Bad"
               value={searchValue}
               onChange={(e) => onSearchValueChange(e.target.value)}
             />
-            <Hero.Button type="submit">
+            <button
+              className="px-4 py-5 border border-l-0 cursor-pointer bg-black/10 group-focus-within:border-primary-600 rounded-r-xl border-dark-700"
+              type="submit"
+            >
               <svg
                 width="24"
                 height="24"
@@ -73,14 +100,14 @@ const HomeLayout = ({
                   strokeLinejoin="round"
                 />
               </svg>
-            </Hero.Button>
-          </Hero.Form>
+            </button>
+          </form>
           <Switch
             value={category}
             items={categoryValues}
             onChange={onSelectCategory}
           />
-        </Hero.Wrapper>
+        </div>
         <Grid.Wrapper>
           {isLoading
             ? Array(4)
@@ -88,7 +115,7 @@ const HomeLayout = ({
                 .map((Card, index) => <Card key={index} />)
             : content.map((card, index) => <Card key={index} {...card} />)}
         </Grid.Wrapper>
-      </Container>
+      </div>
       <Footer />
     </>
   )
