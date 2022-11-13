@@ -1,61 +1,5 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import styled, { css } from 'styled-components'
-
-const Wrapper = styled.div`
-  display: flex;
-  background: rgba(32, 40, 62, 0.8);
-  backdrop-filter: blur(1.2rem);
-  /* Note: backdrop-filter has minimal browser support */
-
-  border-radius: 2.4rem;
-  padding: 1.2rem;
-  gap: 1.6rem;
-
-  max-width: 80%;
-
-  color: #fff;
-  text-decoration: none;
-`
-
-const Poster = styled(Image)`
-  border-radius: 1.3rem;
-  position: relative;
-`
-
-const Heading = styled.h4`
-  ${({ theme }) => css`
-    font-family: ${theme.font.family.primary};
-    font-weight: 700;
-    font-size: 2.4rem;
-    line-height: 1.3;
-    letter-spacing: -0.015em;
-    margin-bottom: 0.8rem;
-  `}
-`
-const SubHeading = styled.h5`
-  ${({ theme }) => css`
-    font-family: ${theme.font.family.primary};
-    font-weight: 700;
-    font-size: 1.6rem;
-    line-height: 1.5;
-    letter-spacing: -0.015em;
-  `}
-`
-
-const Overview = styled.p`
-  ${({ theme }) => css`
-    font-family: ${theme.font.family.secondary};
-    font-weight: 400;
-    font-size: 1.6rem;
-    line-height: 1.5;
-    margin-top: 2.4rem;
-  `}
-`
-
-const ContentArea = styled.div`
-  padding: 1.6rem 0;
-`
 
 type SeasonProps = {
   id: number
@@ -70,9 +14,10 @@ type SeasonProps = {
 const Season = (props: SeasonProps) => {
   return (
     <Link href={`${props.tvshow_id}/seasons`} passHref>
-      <Wrapper>
-        <div style={{ position: 'relative' }}>
-          <Poster
+      <a className="flex text-white bg-dark-800/80 backdrop-blur-md rounded-2xl p-3 gap-4 w-[80%]">
+        <div className="relative flex-shrink-0 w-40">
+          <Image
+            className="relative rounded-xl"
             src={`http://image.tmdb.org/t/p/w342${props.poster}`}
             width={160}
             height={240}
@@ -80,15 +25,17 @@ const Season = (props: SeasonProps) => {
             // layout="fill"
           />
         </div>
-        <ContentArea>
-          <Heading>{props.name}</Heading>
-          <SubHeading>
+        <div className="flex-grow-0 py-4">
+          <h4 className="text-2xl font-bold tracking-tight ">{props.name}</h4>
+          <h5 className="mb-2 text-base font-bold tracking-tight">
             {props.year} | {props.episode_count} episódio
             {props.episode_count > 1 && 's'}
-          </SubHeading>
-          <Overview>{props.overview}</Overview>
-        </ContentArea>
-      </Wrapper>
+          </h5>
+          <p className="w-full mt-6 text-ellipsis font-secondary">
+            {props.overview}
+          </p>
+        </div>
+      </a>
     </Link>
   )
 }

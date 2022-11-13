@@ -15,8 +15,6 @@ const MovieLayout = ({ detail, credits }: MovieLayoutProps) => {
 
   const movie = detail.data
 
-  const isLoading = detail.isLoading || credits.isLoading
-
   const cast = credits.data.cast ? credits.data.cast.slice(0, 15) : []
 
   const directors = credits.data.crew.filter((crew) => crew.job == 'Director')
@@ -25,54 +23,42 @@ const MovieLayout = ({ detail, credits }: MovieLayoutProps) => {
   return (
     <>
       <Navbar />
-      <Page.Container>
-        <Backdrop
-          src={movie.getBackdrop('original')!}
-          alt={movie.title}
-          placeholder={isLoading}
-        />
-        <Page.InfoWrapper>
+      <main className="container">
+        <Backdrop src={movie.getBackdrop('original')!} alt={movie.title} />
+        <div className="page__info_wrapper">
           <Poster
             title={movie.title}
             src={movie.getPoster('original')!}
             alt={movie.title}
-            placeholder={isLoading}
           />
 
-          <Page.DetailWrapper>
-            <Page.Tagline>{movie.tagline}</Page.Tagline>
-            <Page.Bio>{movie.overview}</Page.Bio>
-
-            <Page.Detail>
-              <Page.DetailTitle>Lançamento</Page.DetailTitle>
-              <Page.DetailContent>
-                {new Date(movie.release_date).toLocaleDateString()}
-              </Page.DetailContent>
-            </Page.Detail>
-            <Page.Detail>
-              <Page.DetailTitle>Gêneros</Page.DetailTitle>
-              <Page.DetailContent>
-                {movie.genres.map(({ name }) => name).join(', ')}
-              </Page.DetailContent>
-            </Page.Detail>
-            <Page.Detail>
-              <Page.DetailTitle>Duração</Page.DetailTitle>
-              <Page.DetailContent>{movie.runtime} minutos</Page.DetailContent>
-            </Page.Detail>
-            <Page.Detail>
-              <Page.DetailTitle>Direção</Page.DetailTitle>
-              <Page.DetailContent>
-                {directors?.map((director) => director.name).join(', ')}
-              </Page.DetailContent>
-            </Page.Detail>
-            <Page.Detail>
-              <Page.DetailTitle>Roteiro</Page.DetailTitle>
-              <Page.DetailContent>
-                {writers?.map((writer) => writer.name).join(', ')}
-              </Page.DetailContent>
-            </Page.Detail>
-          </Page.DetailWrapper>
-        </Page.InfoWrapper>
+          <div className="page__detail_wrapper">
+            <h3 className="page__tagline">{movie.tagline}</h3>
+            <p className="page__bio">{movie.overview}</p>
+            <div className="page__detail_grid">
+              <Page.Detail
+                title="Lançamento"
+                content={new Date(movie.release_date).toLocaleDateString()}
+              />
+              <Page.Detail
+                title="Gêneros"
+                content={movie.genres.map(({ name }) => name).join(', ')}
+              />
+              <Page.Detail
+                title="Duração"
+                content={`${movie.runtime} minutos`}
+              />
+              <Page.Detail
+                title="Direção"
+                content={directors?.map((director) => director.name).join(', ')}
+              />
+              <Page.Detail
+                title="Roteiro"
+                content={writers?.map((writer) => writer.name).join(', ')}
+              />
+            </div>
+          </div>
+        </div>
         <Cast.Title>Elenco Principal</Cast.Title>
         <Cast.List>
           {cast.slice(0, 15).map((actor) => (
@@ -84,7 +70,7 @@ const MovieLayout = ({ detail, credits }: MovieLayoutProps) => {
             />
           ))}
         </Cast.List>
-      </Page.Container>
+      </main>
       <Footer />
     </>
   )

@@ -2,7 +2,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { Loader } from '../loader'
-import * as S from './styles'
+
+import styles from './styles.module.scss'
 
 export type CardProps = {
   title: string
@@ -29,7 +30,7 @@ const LinkWrapper = ({ children, link }: LinkWrapperProps) => {
 const Card = ({ title, rating, poster, link }: CardProps) => {
   return (
     <LinkWrapper link={link}>
-      <div className="bg-dark-800/80 relative backdrop-blur-[80px] p-2  rounded-lg pb-6 ">
+      <div className={styles.wrapper}>
         {poster ? (
           <Image
             className="w-full h-10 rounded-lg"
@@ -38,7 +39,7 @@ const Card = ({ title, rating, poster, link }: CardProps) => {
             height={900}
           />
         ) : (
-          <S.ImagePlaceholder />
+          <div className={styles.image__placeholder} />
         )}
         <div className="absolute top-4 left-4 text-[#ffad49] flex p-2 py-3 justify-center items-center gap-1 bg-black/60 rounded-lg backdrop-blur text-base font-secondary">
           <svg
@@ -56,7 +57,7 @@ const Card = ({ title, rating, poster, link }: CardProps) => {
               strokeLinejoin="round"
             />
           </svg>
-          <span style={{ lineHeight: '1' }}>{rating}</span>
+          <span className="leading-none">{rating}</span>
         </div>
         <h4 className="mt-4 ml-4 font-sans text-base font-bold text-dark-50">
           {title}
@@ -67,15 +68,15 @@ const Card = ({ title, rating, poster, link }: CardProps) => {
 }
 
 const CardPlaceholder = () => (
-  <S.WrapperPlaceholder>
-    <S.ImagePlaceholder>
+  <div className={styles.wrapper__placeholder}>
+    <div className={styles.image__placeholder}>
       <Loader />
-    </S.ImagePlaceholder>
-    <S.BadgePlaceholder />
-    <S.TitlePlaceholder>
+    </div>
+    <div className={styles.badge__placeholder} />
+    <div className={styles.title__placeholder}>
       <Loader />
-    </S.TitlePlaceholder>
-  </S.WrapperPlaceholder>
+    </div>
+  </div>
 )
 
 export { Card, CardPlaceholder }

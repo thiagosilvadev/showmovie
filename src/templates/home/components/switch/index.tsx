@@ -10,10 +10,9 @@ type SwitchProps = {
 }
 
 export const Switch = ({ value, onChange, items }: SwitchProps) => {
-  const grid = `grid-cols-${items.length}`
   return (
     <div className="relative p-2 rounded-lg w-fit bg-black/10">
-      <div className={classNames('grid', grid)}>
+      <div className="grid grid-cols-3">
         {items.map((item) => (
           <button
             className={classNames(

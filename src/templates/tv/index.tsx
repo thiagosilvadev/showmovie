@@ -6,6 +6,7 @@ import { Backdrop } from '@/components/backdrop'
 import Poster from '@/components/poster'
 import Cast from '@/components/cast'
 import { Season } from '@/components/season'
+import { Footer } from '@/components/footer'
 
 type TvShowLayoutProps = TvDetailResult
 
@@ -14,8 +15,6 @@ export function TvShowLayout({ detail, credits }: TvShowLayoutProps) {
 
   const tvshow = detail.data
 
-  const isLoading = detail.isLoading || credits.isLoading
-
   const cast = credits.data.cast ? credits.data.cast.slice(0, 15) : []
 
   const lastSeason = tvshow.seasons[tvshow.seasons.length - 1]
@@ -23,72 +22,63 @@ export function TvShowLayout({ detail, credits }: TvShowLayoutProps) {
   return (
     <>
       <Navbar />
-      <Page.Container>
-        <Backdrop
-          src={tvshow.getBackdrop('w1280')!}
-          alt={tvshow.name}
-          placeholder={isLoading}
-        />
+      <main className="container">
+        <Backdrop src={tvshow.getBackdrop('w1280')!} alt={tvshow.name} />
 
-        <Page.InfoWrapper>
+        <div className="page__info_wrapper">
           <Poster
             title={tvshow.name}
-            // @ts-ignore
             src={tvshow.getPoster('w780')!}
             alt={tvshow.name}
-            placeholder={isLoading}
           />
 
-          <Page.DetailWrapper>
-            <Page.Tagline>{tvshow.tagline}</Page.Tagline>
-            <Page.Bio>{tvshow.overview}</Page.Bio>
-            <Page.DetailGrid>
-              <Page.Detail>
-                <Page.DetailTitle>Status</Page.DetailTitle>
-                <Page.DetailContent>{tvshow.status}</Page.DetailContent>
-              </Page.Detail>
-              <Page.Detail columns={6}>
-                <Page.DetailTitle>Temporadas</Page.DetailTitle>
-                <Page.DetailContent>
-                  {tvshow.number_of_seasons}
-                </Page.DetailContent>
-              </Page.Detail>
-              <Page.Detail columns={6}>
-                <Page.DetailTitle>Episódios</Page.DetailTitle>
-                <Page.DetailContent>
-                  {tvshow.number_of_episodes}
-                </Page.DetailContent>
-              </Page.Detail>
-              <Page.Detail columns={6}>
-                <Page.DetailTitle>Duração dos episódios</Page.DetailTitle>
-                <Page.DetailContent>
-                  {tvshow.episode_run_time}m
-                </Page.DetailContent>
-              </Page.Detail>
-              <Page.Detail columns={6}>
-                <Page.DetailTitle>Ano de Lançamento</Page.DetailTitle>
-                <Page.DetailContent>
-                  {new Date(tvshow.first_air_date).getFullYear()}
-                </Page.DetailContent>
-              </Page.Detail>
-              <Page.Detail>
-                <Page.DetailTitle>Gêneros</Page.DetailTitle>
-                <Page.DetailContent>
-                  {tvshow.genres.map(({ name }) => name).join(', ')}
-                </Page.DetailContent>
-              </Page.Detail>
-              <Page.Detail>
-                <Page.DetailTitle>Criação</Page.DetailTitle>
-                <Page.DetailContent>
-                  {tvshow.created_by.map(({ name }) => name).join(', ')}
-                </Page.DetailContent>
-              </Page.Detail>
-            </Page.DetailGrid>
-          </Page.DetailWrapper>
-        </Page.InfoWrapper>
-        <Cast.Title style={{ marginBottom: '2.8rem' }}>
-          Temporada atual
-        </Cast.Title>
+          <div className="page__detail_wrapper">
+            <h3 className="page__tagline">{tvshow.tagline}</h3>
+            <p className="page__bio">{tvshow.overview}</p>
+            <div className="page__detail_grid">
+              <Page.Detail title="Status" content={tvshow.status} />
+              <Page.Detail
+                title="Temporadas"
+                content={String(tvshow.number_of_seasons)}
+                columns={6}
+              />
+              <Page.Detail
+                title="Episódios"
+                content={tvshow.number_of_episodes.toString()}
+                columns={6}
+              />
+              <Page.Detail
+                title="Duração dos episódios"
+                content={`${tvshow.episode_run_time}m`}
+                columns={6}
+              />
+              <Page.Detail
+                title="Ano de Lançamento"
+                content={`${new Date(tvshow.first_air_date).getFullYear()}`}
+                columns={6}
+              />
+              <Page.Detail
+                title="Gêneros"
+                content={tvshow.genres.map(({ name }) => name).join(', ')}
+                columns={6}
+              />
+
+              <Page.Detail
+                title="Criação"
+                content={tvshow.created_by.map(({ name }) => name).join(', ')}
+              />
+            </div>
+          </div>
+        </div>
+        <div className="flex items-center gap-6 mb-7">
+          <Cast.Title>Temporada atual</Cast.Title>
+          <a
+            className="mt-1 text-sm font-bold leading-none tracking-wide uppercase text-primary-500 opacity-80 hover:opacity-100 font-auxiliar"
+            href={`${tvshow.id}/seasons`}
+          >
+            Ver todas
+          </a>
+        </div>
 
         <Season
           episode_count={lastSeason.episode_count}
@@ -110,9 +100,7 @@ export function TvShowLayout({ detail, credits }: TvShowLayoutProps) {
           year={new Date(lastSeason.air_date).getFullYear().toString()}
         />
 
-        <Cast.Title style={{ marginTop: '3.2rem' }}>
-          Elenco Principal
-        </Cast.Title>
+        <Cast.Title className="mt-8">Elenco Principal</Cast.Title>
         <Cast.List>
           {cast.slice(0, 15).map((actor) => (
             <Cast.Item
@@ -123,7 +111,8 @@ export function TvShowLayout({ detail, credits }: TvShowLayoutProps) {
             />
           ))}
         </Cast.List>
-      </Page.Container>
+      </main>
+      <Footer />
     </>
   )
 }

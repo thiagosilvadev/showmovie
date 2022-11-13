@@ -8,3 +8,29 @@ body {
   background-size: cover;
   background-attachment: fixed;
 }
+
+.container {
+  @apply mx-auto
+}
+
+@layer components {
+  .page__info_wrapper {
+    @apply grid gap-12 pl-6 pt-28 items-start;
+    grid-template-columns: 30% 1fr;
+  }
+
+  .page__tagline {
+    @apply font-secondary uppercase text-primary-100 text-sm font-bold mb-4
+  }
+
+  .page__bio {
+    @apply font-secondary text-dark-100 text-base mb-12 w-4/5
+  }
+  .page__detail {
+    @apply px-3
+  }
+
+  .page__detail_grid {
+    @apply flex items-start flex-wrap
+  }
+}

@@ -1,5 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  mode: 'jit',
+  // These paths are just examples, customize them to match your project structure
   content: [
     './src/app/**/*.{js,ts,jsx,tsx}',
     './src/pages/**/*.{js,ts,jsx,tsx}',
@@ -26,6 +28,19 @@ module.exports = {
       fontFamily: {
         secondary: [
           "'Poppins'",
+          '-apple-system',
+          'BlinkMacSystemFont',
+          "'Segoe UI'",
+          'Roboto',
+          'Oxygen',
+          'Ubuntu',
+          'Cantarell',
+          "'Open Sans'",
+          "'Helvetica Neue'",
+          'sans-serif'
+        ],
+        auxiliar: [
+          "'Inter'",
           '-apple-system',
           'BlinkMacSystemFont',
           "'Segoe UI'",
