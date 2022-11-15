@@ -14,15 +14,15 @@ type SeasonProps = {
 const Season = (props: SeasonProps) => {
   return (
     <Link href={`${props.tvshow_id}/seasons`} passHref>
-      <a className="flex text-white bg-dark-800/80 backdrop-blur-md rounded-2xl p-3 gap-4 w-[80%]">
-        <div className="relative flex-shrink-0 w-40">
+      <a className="flex flex-col sm:flex-row text-white bg-dark-800/80 backdrop-blur-md rounded-2xl p-5 md:p-3 gap-4 w-[80%]">
+        <div className="relative sm:flex-shrink-0 sm:w-40">
           <Image
             className="relative rounded-xl"
             src={`http://image.tmdb.org/t/p/w342${props.poster}`}
             width={160}
             height={240}
             objectFit="cover"
-            // layout="fill"
+            layout="responsive"
           />
         </div>
         <div className="flex-grow-0 py-4">

@@ -4,6 +4,7 @@
 
 
 body {
+  @apply text-white;
   background-image: url('/background.png');
   background-size: cover;
   background-attachment: fixed;
@@ -32,5 +33,9 @@ body {
 
   .page__detail_grid {
     @apply flex items-start flex-wrap
+  }
+
+  .section_title {
+    @apply text-4xl font-bold tracking-tighter text-white;
   }
 }

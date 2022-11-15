@@ -6,7 +6,7 @@ type DetailProps = {
 export const Detail = ({ columns, title, content }: DetailProps) => {
   return (
     <div
-      className="py-3 page__detail"
+      className="py-4 page__detail"
       style={{
         width: columns ? `${(columns / 12) * 100}%` : '100%'
       }}
