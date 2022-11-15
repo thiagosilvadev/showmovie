@@ -6,7 +6,7 @@ const useMovieAndTVSearch = (
   query: string,
   fetchMode: 'both' | 'movies' | 'tvshows'
 ) => {
-  const { data, isLoading } = useQuery(
+  const { data, isLoading, isFetching } = useQuery(
     ['moviesAndTv', query, fetchMode],
     async () => {
       const { search } = tmdb()
@@ -23,7 +23,8 @@ const useMovieAndTVSearch = (
 
   return {
     data,
-    isLoading
+    isLoading,
+    isFetching
   }
 }
 

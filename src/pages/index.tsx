@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useDebounce } from '@/hooks'
 import { HomeLayout } from '@/templates/home'
 import {
@@ -28,9 +28,15 @@ const Home = () => {
   const moviesAndTv = useMovieAndTvQuery(category, debouncedQuery !== '')
   const search = useMovieAndTVSearch(debouncedQuery, category)
 
-  const isLoading = debouncedQuery ? search.isLoading : moviesAndTv.isLoading
+  const isLoading = useMemo(
+    () => (debouncedQuery ? search.isLoading : moviesAndTv.isLoading),
+    [debouncedQuery, moviesAndTv, search]
+  )
 
-  const content = debouncedQuery ? search.data : moviesAndTv.data
+  const content = useMemo(
+    () => (debouncedQuery ? search.data : moviesAndTv.data),
+    [debouncedQuery, moviesAndTv, search]
+  )
 
   return (
     <HomeLayout

@@ -17,9 +17,8 @@ type MoviesAndTv = {
 }
 function getMoviesAndTvList(
   fetchMode: FetchMode,
-  data: MoviesAndTv | undefined
-): CardProps[] | undefined {
-  if (!data) return
+  data: MoviesAndTv
+): CardProps[] {
   if (fetchMode === 'both') {
     return [...data.movies, ...data.tvshows].sort(() => Math.random() - 0.5)
   } else {
@@ -46,7 +45,10 @@ const useMovieAndTvQuery = (
 ): MovieAndTvQueryResult => {
   const { data, isLoading } = useQuery(
     ['moviesAndTv', isSearching],
-    fetchMovieAndTv,
+    async () => {
+      const response = await fetchMovieAndTv()
+      return getMoviesAndTvList(fetchMode, response)
+    },
     {
       refetchOnWindowFocus: false,
       cacheTime: 60 * 60,
@@ -56,7 +58,7 @@ const useMovieAndTvQuery = (
 
   return {
     isLoading,
-    data: getMoviesAndTvList(fetchMode, data)
+    data
   }
 }
 
