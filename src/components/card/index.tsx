@@ -19,8 +19,8 @@ type LinkWrapperProps = {
 
 const LinkWrapper = ({ children, link }: LinkWrapperProps) => {
   return link ? (
-    <Link href={link} passHref>
-      <a style={{ textDecoration: 'none' }}> {children}</a>
+    <Link href={link} passHref style={{ textDecoration: 'none' }}>
+      {children}
     </Link>
   ) : (
     <>{children}</>

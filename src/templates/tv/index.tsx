@@ -90,10 +90,12 @@ export function TvShowLayout({ detail, credits }: TvShowLayoutProps) {
                         {season.episode_count > 1 && 's'}
                       </span>
                     </div>
-                    <Link href={`${tvshow.id}/season/${season.id}`} passHref>
-                      <a className="text-[12px] font-bold tracking-wider uppercase font-auxiliar text-primary-500 hover:text-primary-300">
-                        ver episódios
-                      </a>
+                    <Link
+                      href={`${tvshow.id}/season/${season.id}`}
+                      passHref
+                      className="text-[12px] font-bold tracking-wider uppercase font-auxiliar text-primary-500 hover:text-primary-300"
+                    >
+                      ver episódios
                     </Link>
                   </div>
                 ))}

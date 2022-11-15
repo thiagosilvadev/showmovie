@@ -22,10 +22,13 @@ export const Navbar = () => (
       <Image className="w-28" src="/logo.svg" alt="" width={120} height={50} />
       <nav className="flex items-center justify-between gap-6">
         {navLinks.map((link, index) => (
-          <Link href={link.path} key={index} passHref>
-            <a className="font-semibold text-dark-100 hover:text-white">
-              {link.label}
-            </a>
+          <Link
+            href={link.path}
+            key={index}
+            passHref
+            className="font-semibold text-dark-100 hover:text-white"
+          >
+            {link.label}
           </Link>
         ))}
       </nav>
