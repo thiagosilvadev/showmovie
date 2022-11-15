@@ -33,8 +33,9 @@ const Card = ({ title, rating, poster, link }: CardProps) => {
       <div className={styles.wrapper}>
         {poster ? (
           <Image
-            className="w-full h-10 rounded-lg"
+            className="object-cover w-full rounded-lg h-[420px] min-h-min"
             src={poster}
+            alt={title}
             width={600}
             height={900}
           />

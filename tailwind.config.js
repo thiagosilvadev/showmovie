@@ -11,7 +11,7 @@ module.exports = {
   theme: {
     fontFamily: {
       sans: [
-        "'Raleway'",
+        'var(--font-raleway)',
         '-apple-system',
         'BlinkMacSystemFont',
         "'Segoe UI'",
@@ -27,7 +27,7 @@ module.exports = {
     extend: {
       fontFamily: {
         secondary: [
-          "'Poppins'",
+          'var(--font-poppins)',
           '-apple-system',
           'BlinkMacSystemFont',
           "'Segoe UI'",
@@ -40,7 +40,7 @@ module.exports = {
           'sans-serif'
         ],
         auxiliar: [
-          "'Inter'",
+          'var(--font-inter)',
           '-apple-system',
           'BlinkMacSystemFont',
           "'Segoe UI'",

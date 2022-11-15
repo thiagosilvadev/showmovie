@@ -110,7 +110,8 @@ const Item = ({ name, avatar, character }: ItemProps) => {
         width={170}
         height={220}
         src={`http://image.tmdb.org/t/p/w185${avatar}`}
-        objectFit="cover"
+        alt={name}
+        className="object-cover"
       />
       <Name>{name}</Name>
       <Character>{character}</Character>
