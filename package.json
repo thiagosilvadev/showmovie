@@ -18,10 +18,12 @@
     "axios": "^0.27.2",
     "classnames": "^2.3.2",
     "next": "^13.0.3",
+    "plaiceholder": "^2.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-polymorphic-box": "^3.0.3",
-    "sass": "^1.56.1"
+    "sass": "^1.56.1",
+    "sharp": "^0.31.2"
   },
   "devDependencies": {
     "@faker-js/faker": "^7.3.0",
