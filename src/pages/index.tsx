@@ -28,16 +28,9 @@ const Home = () => {
   const moviesAndTv = useMovieAndTvQuery(category, debouncedQuery !== '')
   const search = useMovieAndTVSearch(debouncedQuery, category)
 
-  const isLoading = useMemo(
-    () => (debouncedQuery ? search.isLoading : moviesAndTv.isLoading),
-    [debouncedQuery, moviesAndTv, search]
-  )
+  const isLoading = debouncedQuery ? search.isLoading : moviesAndTv.isLoading
 
-  const content = useMemo(
-    () => (debouncedQuery ? search.data : moviesAndTv.data),
-    [debouncedQuery, moviesAndTv, search]
-  )
-
+  const content = debouncedQuery ? search.data : moviesAndTv.data
   return (
     <HomeLayout
       isLoading={isLoading}

@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /** @type {import('next').NextConfig} */
-const { withPlaiceholder } = require('@plaiceholder/next')
-
-const nextConfig = withPlaiceholder({
+const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   experimental: { appDir: true },
@@ -12,6 +10,6 @@ const nextConfig = withPlaiceholder({
   images: {
     domains: ['www.themoviedb.org', 'image.tmdb.org']
   }
-})
+}
 
 module.exports = nextConfig

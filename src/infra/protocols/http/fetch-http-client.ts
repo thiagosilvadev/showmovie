@@ -22,7 +22,7 @@ export class FetchHttpClient implements HttpClient {
       headers,
       method,
       body: JSON.stringify(body),
-      cache: 'force-cache'
+      cache: 'no-cache'
     })
 
     const json = await response.json()

@@ -1,20 +1,16 @@
 import * as Page from '@/components/page'
 import { Backdrop } from '@/components/backdrop'
 import Poster from '@/components/poster'
-import Cast from '@/components/cast'
-import { Footer } from '@/components/footer'
 import Link from 'next/link'
 import { TMDBTvShowDetail } from '@/lib/tmdb/models/TMDBTvShow'
-import { TMDBCredits } from '@/lib/tmdb/models/TMDBMovie'
+import { CastSkeleton, CastTemplate } from './cast'
+import { Suspense } from 'react'
 
 type TvShowLayoutProps = {
   detail: TMDBTvShowDetail
-  credits: TMDBCredits
 }
 
-export function TvShowLayout({ detail: tvshow, credits }: TvShowLayoutProps) {
-  const cast = credits.cast ? credits.cast.slice(0, 15) : []
-
+export async function TvShowLayout({ detail: tvshow }: TvShowLayoutProps) {
   const seasons = tvshow.seasons.filter(
     (season) => season.air_date && season.season_number != 0
   )
@@ -98,17 +94,10 @@ export function TvShowLayout({ detail: tvshow, credits }: TvShowLayoutProps) {
           </div>
         </div>
       </div>
-      <Cast.Title className="mt-12">Elenco Principal</Cast.Title>
-      <Cast.List>
-        {cast.slice(0, 15).map((actor) => (
-          <Cast.Item
-            key={actor.id}
-            avatar={actor.profile_path}
-            name={actor.name}
-            character={actor.character}
-          />
-        ))}
-      </Cast.List>
+      <Suspense fallback={<CastSkeleton />}>
+        {/* @ts-expect-error Async Server Component */}
+        <CastTemplate tvShowId={tvshow.id} />
+      </Suspense>
     </>
   )
 }

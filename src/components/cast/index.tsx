@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import Image, { ImageProps } from 'next/image'
 import { HTMLAttributes } from 'react'
+import { ImageLoader, Loader } from '../loader'
 import styles from './styles.module.css'
 
 export const Title = ({
@@ -119,10 +120,22 @@ const Item = ({ name, avatar, character }: ItemProps) => {
   )
 }
 
+const ItemSkeleton = () => (
+  <Wrapper>
+    <div className="rounded-xl  bg-dark-800 h-[220px] relative overflow-hidden">
+      <ImageLoader />
+    </div>
+    <div className="relative w-8/12 h-4 mt-2 overflow-hidden rounded-xl bg-dark-800">
+      <Loader />
+    </div>
+  </Wrapper>
+)
+
 const Cast = {
   Title,
   Item,
-  List
+  List,
+  ItemSkeleton
 }
 
 export default Cast
