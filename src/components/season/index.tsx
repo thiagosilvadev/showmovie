@@ -20,12 +20,11 @@ const Season = (props: SeasonProps) => {
     >
       <div className="relative sm:flex-shrink-0 sm:w-40">
         <Image
-          className="relative rounded-xl"
+          className="relative object-cover rounded-xl"
           src={`http://image.tmdb.org/t/p/w342${props.poster}`}
+          alt={props.name}
           width={160}
           height={240}
-          objectFit="cover"
-          layout="responsive"
         />
       </div>
       <div className="flex-grow-0 py-4">

@@ -10,6 +10,7 @@ export type CardProps = {
   link?: string
   rating?: number
   poster?: string | null
+  popularity?: number
 }
 
 type LinkWrapperProps = {

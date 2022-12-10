@@ -1,12 +1,12 @@
 import Cast from '@/components/cast'
-import tmdb from '@/lib/tmdb'
+import { TMDBCredits } from '@/lib/tmdb/models/TMDBMovie'
 
 type CastTemplateProps = {
-  tvShowId: number
+  query: () => Promise<TMDBCredits>
 }
 
-export const CastTemplate = async ({ tvShowId }: CastTemplateProps) => {
-  const credits = await tmdb().tvshows.loadCredits(tvShowId)
+export const CastTemplate = async ({ query }: CastTemplateProps) => {
+  const credits = await query()
   const cast = credits.cast ? credits.cast.slice(0, 15) : []
 
   return (

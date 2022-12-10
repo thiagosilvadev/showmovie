@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { TMDBTvShowDetail } from '@/lib/tmdb/models/TMDBTvShow'
 import { CastSkeleton, CastTemplate } from './cast'
 import { Suspense } from 'react'
+import tmdb from '@/lib/tmdb'
 
 type TvShowLayoutProps = {
   detail: TMDBTvShowDetail
@@ -14,6 +15,8 @@ export async function TvShowLayout({ detail: tvshow }: TvShowLayoutProps) {
   const seasons = tvshow.seasons.filter(
     (season) => season.air_date && season.season_number != 0
   )
+
+  const loadCredits = async () => tmdb().tvshows.loadCredits(tvshow.id)
 
   return (
     <>
@@ -96,7 +99,7 @@ export async function TvShowLayout({ detail: tvshow }: TvShowLayoutProps) {
       </div>
       <Suspense fallback={<CastSkeleton />}>
         {/* @ts-expect-error Async Server Component */}
-        <CastTemplate tvShowId={tvshow.id} />
+        <CastTemplate query={loadCredits} />
       </Suspense>
     </>
   )

@@ -1,4 +1,3 @@
-import { AxiosHttpClient } from '@/infra/protocols/http/axios-http-client'
 import { FetchHttpClient } from '@/infra/protocols/http/fetch-http-client'
 import TMDBClient from './tmdb-client'
 

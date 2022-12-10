@@ -1,8 +1,5 @@
 import tmdb from '@/lib/tmdb'
 import { TvShowLayout } from '@/templates/tv'
-import Loading from './loading'
-
-export const revalidate = 'jasdjsadjas'
 
 export type PageProps = {
   params: {

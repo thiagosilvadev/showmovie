@@ -20,7 +20,9 @@ function getMoviesAndTvList(
   data: MoviesAndTv
 ): CardProps[] {
   if (fetchMode === 'both') {
-    return [...data.movies, ...data.tvshows].sort(() => Math.random() - 0.5)
+    return [...data.movies, ...data.tvshows].sort((a, b) =>
+      a.popularity! > b.popularity! ? -1 : 1
+    )
   } else {
     return data[fetchMode]
   }
@@ -44,7 +46,7 @@ const useMovieAndTvQuery = (
   isSearching: boolean
 ): MovieAndTvQueryResult => {
   const { data, isLoading } = useQuery(
-    ['moviesAndTv', isSearching],
+    ['moviesAndTv', isSearching, fetchMode],
     async () => {
       const response = await fetchMovieAndTv()
       return getMoviesAndTvList(fetchMode, response)

@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-page-custom-font */
+import { Footer } from '@/components/footer'
 import { Navbar } from '@/components/navbar'
 import '@/styles/globals.css'
 
@@ -18,7 +19,11 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <Navbar />
+        {children}
+        <Footer />
+      </body>
     </html>
   )
 }

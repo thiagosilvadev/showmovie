@@ -9,14 +9,16 @@ function moviesOrTvToCard(content: Array<TMDBMovie | TMDBTvShow>): CardProps[] {
         title: item.title,
         link: `/movie/${item.id}`,
         poster: item.getPoster('w500'),
-        rating: item.vote_average
+        rating: item.vote_average,
+        popularity: item.popularity
       }
     } else {
       return {
         title: item.name,
         link: `/tv/${item.id}`,
         poster: item.getPoster('w500'),
-        rating: item.vote_average
+        rating: item.vote_average,
+        popularity: item.popularity
       }
     }
   })

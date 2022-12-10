@@ -21,8 +21,7 @@ export class FetchHttpClient implements HttpClient {
     const response = await fetch(url, {
       headers,
       method,
-      body: JSON.stringify(body),
-      cache: 'no-cache'
+      body: JSON.stringify(body)
     })
 
     const json = await response.json()
