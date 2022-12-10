@@ -2,6 +2,7 @@
 import { Footer } from '@/components/footer'
 import { Navbar } from '@/components/navbar'
 import '@/styles/globals.css'
+import Provider from './provider'
 
 export default function RootLayout({
   children
@@ -20,9 +21,14 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <Navbar />
-        {children}
-        <Footer />
+        {
+          /* @ts-expect-error Server Component */
+          <Provider>
+            <Navbar />
+            {children}
+            <Footer />
+          </Provider>
+        }
       </body>
     </html>
   )

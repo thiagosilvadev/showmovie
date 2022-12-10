@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from 'react'
 import { useDebounce } from '@/hooks'
 import { HomeLayout } from '@/templates/home'

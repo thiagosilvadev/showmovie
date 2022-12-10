@@ -1,6 +1,4 @@
 import { Card, CardPlaceholder, CardProps } from '@/components/card'
-import { Navbar } from '@/components/navbar'
-import { Footer } from '@/components/footer'
 import { Switch } from './components/switch'
 import * as Grid from './components/grid'
 import classNames from 'classnames'
@@ -33,8 +31,7 @@ const HomeLayout = ({
 }: HomeProps) => {
   return (
     <>
-      <Navbar />
-      <div className="container mx-auto">
+      <div className="container">
         <div className="w-full pt-20 ">
           <h1 className="text-6xl font-bold tracking-tight text-dark-50">
             Bem vindo
@@ -116,7 +113,6 @@ const HomeLayout = ({
             : content.map((card, index) => <Card key={index} {...card} />)}
         </Grid.Wrapper>
       </div>
-      <Footer />
     </>
   )
 }
